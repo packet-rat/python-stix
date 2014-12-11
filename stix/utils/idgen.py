@@ -48,14 +48,15 @@ class IDGenerator(object):
             raise InvalidMethodError("invalid method: %s" % value)
         self._method = value
 
-    def create_id(self, prefix="guid"):
+    def create_id(self, prefix="guid", indicator):
         """Create an ID.
 
         Note that if `prefix` is not provided, it will be `quid`, even if the
         `method` is `METHOD_INT`.
         """
         if self.method == IDGenerator.METHOD_UUID:
-            id_ = str(uuid.uuid4())
+            # id_ = str(uuid.uuid4())
+            id_ = str(uuid.uuid3(ns_prefix,indicator )
         elif self.method == IDGenerator.METHOD_INT:
             id_ = self.next_int
             self.next_int += 1
